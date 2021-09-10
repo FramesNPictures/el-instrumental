@@ -27,8 +27,12 @@ class InstrumentalModule extends ElModule
         $appName = Config::get('instrumental.app.name');
 
         return [
-            InstrumentalConnector::class => fn() => new InstrumentalConnector($apiKey),
-            Instrumental::class => fn() => new Instrumental($appName, $enabled),
+            InstrumentalConnector::class => function () use ($apiKey) {
+                return new InstrumentalConnector($apiKey);
+            },
+            Instrumental::class => function () use ($appName, $enabled) {
+                return new Instrumental($appName, $enabled);
+            },
         ];
     }
 }
