@@ -58,6 +58,9 @@ class Instrumental
                 (string) $count,
             ]
         );
+        $job     = new SendInstrumentalMetric($command);
+
+        return dispatch($job);
     }
 
     public function notice(int $timestamp = null, int $duration = 0, ?string $message = null): PendingDispatch
