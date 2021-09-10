@@ -20,7 +20,7 @@ return [
      * This will be used as a prefix in metrics
      */
     'app' => [
-        'name' => env('INSTRUMENTAL_APP', 'laravel'),
+        'name' => env('INSTRUMENTAL_APP_NAME', 'laravel'),
     ],
 
 ];
