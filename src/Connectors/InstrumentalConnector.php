@@ -107,8 +107,6 @@ class InstrumentalConnector
             $this->connect();
         }
 
-        echo($command.PHP_EOL.PHP_EOL);
-
         if (fwrite($this->socket, $command.PHP_EOL) === false) {
             throw new RuntimeException('Could not write to collector');
         }
