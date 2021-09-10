@@ -42,6 +42,24 @@ class Instrumental
         return dispatch($job);
     }
 
+    public function increment(string $metric, int $value = 1, int $timestamp = null, $count = 1):PendingDispatch
+    {
+        if (!$timestamp) {
+            $timestamp = Carbon::now()->timestamp;
+        }
+
+        $command = implode(
+            ' ',
+            [
+                'increment',
+                implode('.', [$this->$metric, $metric]),
+                $value,
+                (string) $timestamp,
+                (string) $count,
+            ]
+        );
+    }
+
     public function notice(int $timestamp = null, int $duration = 0, ?string $message = null): PendingDispatch
     {
         if (!$timestamp) {
