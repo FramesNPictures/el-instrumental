@@ -84,7 +84,7 @@ class InstrumentalConnector
             throw new RuntimeException($errorMessage, $errorCode);
         }
 
-        stream_set_timeout($this->socket, $responseTimeout, 0);
+        stream_set_timeout($this->socket, $this->responseTimeout, 0);
 
         $hostname     = gethostname();
         $pid          = getmypid();
