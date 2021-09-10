@@ -11,7 +11,7 @@ return [
      * Api
      */
     'api' => [
-        'key' => env('INSTRUMENTAL_TOKEN', ''),
+        'key' => env('INSTRUMENTAL_API_KEY', ''),
     ],
 
     /*
