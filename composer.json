@@ -16,15 +16,17 @@
     ],
     "require": {
         "php": "^8.0",
-        "framesnpictures/el-module": "^0.3.0"
+        "framesnpictures/el-module": "^0.3.0",
+        "monolog/monolog": "^2.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^6.21"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Fnp\\ElInstrumental\\Module"
+                "InstrumentalModule"
             ]
         }
     }
