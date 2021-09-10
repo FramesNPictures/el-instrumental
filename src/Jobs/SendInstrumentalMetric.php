@@ -14,7 +14,7 @@ class SendInstrumentalMetric implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $command;
+    public $command;
 
     /**
      * @param  string  $command
@@ -30,6 +30,4 @@ class SendInstrumentalMetric implements ShouldQueue
         $service = new InstrumentalConnector($apiKey);
         $service->send($this->command);
     }
-
-
 }
