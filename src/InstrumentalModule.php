@@ -28,7 +28,9 @@ class InstrumentalModule extends ElModule
 
         return [
             InstrumentalConnector::class => function () use ($apiKey) {
-                return new InstrumentalConnector($apiKey);
+                $connector = new InstrumentalConnector($apiKey);
+                $connector->connect();
+                return $connector;
             },
             Instrumental::class => function () use ($appName, $enabled) {
                 return new Instrumental($appName, $enabled);
