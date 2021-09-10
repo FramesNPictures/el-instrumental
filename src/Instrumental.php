@@ -27,7 +27,16 @@ class Instrumental
             $timestamp = Carbon::now()->timestamp;
         }
 
-        $command = implode(' ', ['gauge', $metric, $value, (string) $timestamp, (string) $count]);
+        $command = implode(
+            ' ',
+            [
+                'gauge',
+                implode('.', [$this->$metric, $metric]),
+                $value,
+                (string) $timestamp,
+                (string) $count,
+            ]
+        );
         $job     = new SendInstrumentalMetric($command);
 
         return dispatch($job);
