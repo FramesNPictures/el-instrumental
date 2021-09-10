@@ -28,6 +28,7 @@ class SendInstrumentalMetric implements ShouldQueue
     {
         $apiKey  = Config::get('instrumental.api.key');
         $service = new InstrumentalConnector($apiKey);
+        $service->connect();
         $service->send($this->command);
     }
 
