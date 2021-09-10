@@ -31,7 +31,7 @@ class Instrumental
             ' ',
             [
                 'gauge',
-                implode('.', [$this->$metric, $metric]),
+                implode('.', [$this->metric, $metric]),
                 $value,
                 (string) $timestamp,
                 (string) $count,
@@ -42,7 +42,7 @@ class Instrumental
         return dispatch($job);
     }
 
-    public function increment(string $metric, int $value = 1, int $timestamp = null, $count = 1):PendingDispatch
+    public function increment(string $metric, int $value = 1, int $timestamp = null, $count = 1): PendingDispatch
     {
         if (!$timestamp) {
             $timestamp = Carbon::now()->timestamp;
@@ -52,7 +52,7 @@ class Instrumental
             ' ',
             [
                 'increment',
-                implode('.', [$this->$metric, $metric]),
+                implode('.', [$this->metric, $metric]),
                 $value,
                 (string) $timestamp,
                 (string) $count,
