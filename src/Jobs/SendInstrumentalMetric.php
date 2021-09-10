@@ -14,7 +14,7 @@ class SendInstrumentalMetric implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected string $command;
+    protected $command;
 
     /**
      * @param  string  $command
@@ -26,7 +26,7 @@ class SendInstrumentalMetric implements ShouldQueue
 
     public function handle()
     {
-        $apiKey  = Config::get('instrumental.key');
+        $apiKey  = Config::get('instrumental.api.key');
         $service = new InstrumentalConnector($apiKey);
         $service->send($this->command);
     }
