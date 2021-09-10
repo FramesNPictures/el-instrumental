@@ -24,10 +24,8 @@ class SendInstrumentalMetric implements ShouldQueue
         $this->command = $command;
     }
 
-    public function handle()
+    public function handle(InstrumentalConnector $connector)
     {
-        $apiKey  = Config::get('instrumental.api.key');
-        $service = new InstrumentalConnector($apiKey);
-        $service->send($this->command);
+        $connector->send($this->command);
     }
 }
