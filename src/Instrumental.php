@@ -37,9 +37,8 @@ class Instrumental
                 (string) $count,
             ]
         );
-        $job     = new SendInstrumentalMetric($command);
 
-        return dispatch($job);
+        return SendInstrumentalMetric::dispatch($command);
     }
 
     public function increment(string $metric, int $value = 1, int $timestamp = null, $count = 1): PendingDispatch
@@ -58,9 +57,8 @@ class Instrumental
                 (string) $count,
             ]
         );
-        $job     = new SendInstrumentalMetric($command);
 
-        return dispatch($job);
+        return SendInstrumentalMetric::dispatch($command);
     }
 
     public function notice(int $timestamp = null, int $duration = 0, ?string $message = null): PendingDispatch
@@ -70,8 +68,7 @@ class Instrumental
         }
 
         $command = implode(' ', ['notice', (string) $timestamp, (string) $duration, $message]);
-        $job     = new SendInstrumentalMetric($command);
 
-        return dispatch($job);
+        return SendInstrumentalMetric::dispatch($command);
     }
 }
