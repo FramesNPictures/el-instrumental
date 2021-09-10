@@ -31,7 +31,7 @@ class Instrumental
             ' ',
             [
                 'gauge',
-                implode('.', [$this->metric, $metric]),
+                implode('.', [$this->appName, $metric]),
                 $value,
                 (string) $timestamp,
                 (string) $count,
@@ -52,7 +52,7 @@ class Instrumental
             ' ',
             [
                 'increment',
-                implode('.', [$this->metric, $metric]),
+                implode('.', [$this->appName, $metric]),
                 $value,
                 (string) $timestamp,
                 (string) $count,
