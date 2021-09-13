@@ -111,7 +111,7 @@ class InstrumentalConnector
             throw new RuntimeException('Could not write to collector');
         }
 
-        usleep(100);
+        usleep(500);
     }
 
     public function isConnected(): bool
