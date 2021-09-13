@@ -3,6 +3,8 @@
 namespace Fnp\ElInstrumental;
 
 use Carbon\Carbon;
+use Fnp\ElInstrumental\Helpers\PeaceHelper;
+use Fnp\ElInstrumental\Helpers\ProcessHelper;
 use Fnp\ElInstrumental\Jobs\SendInstrumentalMetric;
 use Illuminate\Foundation\Bus\PendingDispatch;
 
@@ -70,5 +72,15 @@ class Instrumental
         $command = implode(' ', ['notice', (string) $timestamp, (string) $duration, $message]);
 
         return SendInstrumentalMetric::dispatch($command);
+    }
+
+    public function process(string $name): ProcessHelper
+    {
+        return new ProcessHelper($this, $name);
+    }
+
+    public function peace(string $metric): PeaceHelper
+    {
+        return new PeaceHelper($this, $metric);
     }
 }
