@@ -2,6 +2,9 @@
 
 namespace Fnp\ElInstrumental\Connectors;
 
+use ErrorException;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 class InstrumentalConnector
@@ -71,8 +74,8 @@ class InstrumentalConnector
 
     public function connect()
     {
-        $errorCode       = null;
-        $errorMessage    = null;
+        $errorCode    = null;
+        $errorMessage = null;
 
         $this->socket = stream_socket_client(
             "tcp://{$this->host}:{$this->port}",
@@ -86,11 +89,11 @@ class InstrumentalConnector
 
         stream_set_timeout($this->socket, $this->responseTimeout, 0);
 
-        $hostname     = gethostname();
-        $pid          = getmypid();
-        $runtime      = phpversion();
-        $platform     = preg_replace('/\s+/', '_', php_uname());
-        $hello =
+        $hostname = gethostname();
+        $pid      = getmypid();
+        $runtime  = phpversion();
+        $platform = preg_replace('/\s+/', '_', php_uname());
+        $hello    =
             'hello version php/instrumental_agent/'.self::VERSION.' '.
             "hostname {$hostname} ".
             "pid {$pid} ".
@@ -101,14 +104,23 @@ class InstrumentalConnector
         $this->send("authenticate {$this->apiKey}");
     }
 
-    public function send($command)
+    public function send($command, $attempts = 5)
     {
         if (!$this->isConnected()) {
             $this->connect();
         }
 
-        if (fwrite($this->socket, $command.PHP_EOL) === false) {
-            throw new RuntimeException('Could not write to collector');
+        try {
+            if (fwrite($this->socket, $command.PHP_EOL) === false) {
+                throw new RuntimeException('Could not write to collector');
+            }
+        } catch (Exception $e) {
+            if ($attempts>0) {
+                $this->disconnect();
+                usleep(500);
+                $this->connect();
+                $this->send($command, $attempts-1);
+            }
         }
 
         usleep(500);
