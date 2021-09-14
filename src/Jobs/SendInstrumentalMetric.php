@@ -30,7 +30,7 @@ class SendInstrumentalMetric implements ShouldQueue
         $lock = Cache::lock('foo', 10);
 
         try {
-            $lock->block(5);
+            $lock->block(2);
             $connector->send($this->command);
             $connector->disconnect();
             usleep(100000);
