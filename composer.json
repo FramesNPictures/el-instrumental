@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "framesnpictures/el-module": "^0.3.0",
+        "framesnpictures/el-module": "^0",
         "monolog/monolog": "^2.3"
     },
     "require-dev": {
