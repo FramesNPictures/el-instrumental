@@ -27,7 +27,7 @@ class SendInstrumentalMetric implements ShouldQueue
 
     public function handle(InstrumentalConnector $connector)
     {
-        $lock = Cache::lock('foo', 10);
+        $lock = Cache::lock('foo', 5);
 
         try {
             $lock->block(2);
