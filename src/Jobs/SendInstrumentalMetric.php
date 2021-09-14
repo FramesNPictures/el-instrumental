@@ -26,5 +26,7 @@ class SendInstrumentalMetric implements ShouldQueue
     public function handle(InstrumentalConnector $connector)
     {
         $connector->send($this->command);
+        $connector->disconnect();
+        usleep(100000);
     }
 }
